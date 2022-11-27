@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <style>
-.text-white{
-    color:white
- }
-.column {
+    .text-white{
+        color:white
+        }
+   .column {
   float: left;
   margin:5px;
   padding:10px;
   background-color: white;
-  height:500px;
+  height:400px;
 }
 nav ul li{
   display: inline-block;
@@ -28,14 +28,10 @@ nav ul li{
   color: green;
 }
 img{
-height:300px;
 
 }
-column:hover{
-transform:translateY(-10px);
-}
 </style>
-<body style="background-color:#FFA4B6">
+<body style="background-color:#F765A3">
 <nav class="navbar" style="background-color:#165BAA">
     <h4 class="navbar-brand text-warning">My Book Recommender</h4>
     <ul>
@@ -48,22 +44,28 @@ transform:translateY(-10px);
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="card-body text-white" style="font-size:50px">Top 50 books</h1>
+            <h1 class="text-white" style="font-size:50px">Recommend Books</h1>
+            <form action="/recommend_books" method="post">
+                <input name="user_input" type="text" class="form-control"><br>
+                <input type="submit" class="btn btn-lg btn-warning">
+            </form>
         </div>
 
-        {%for i in range(book_name|length)%}
-            <div class="col-md-3" style="margin-top:30px;">
-                <div class="card">
-                    <div class="card-body column">
-                        <img class="card-img-top" src="{{image[i]}}">
-                        <p>{{book_name[i]}}</p>
-                        <h5>{{author[i]}}</h5>
-                        <h6>votes: {{votes[i]}}</h6>
-                        <h6>rating: {{rating[i]}}</h6>
+            {%if data%}
+            {%for i in data%}
+                <div class="col-md-3" style="margin-top:30px">
+                    <div class="card ">
+                        <div class="card-body column">
+                            <img class="card-img-top" src="{{i[2]}}" style="height:300px;">
+                            <p>{{i[0]}}</p>
+                            <h6>{{i[1]}}</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {%endfor%}
+            {%endfor%}
+            {%endif%}
+
+
 
 
     </div>
